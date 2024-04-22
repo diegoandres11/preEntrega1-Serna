@@ -1,37 +1,37 @@
 
+let mascotas=[
+    {id:1, especie:"perro", genero:"macho", edadAños:3, color:"negro y blanco"},
+    {id:2, especie:"gato", genero:"macho", edadAños:0.4, color:"naranja"},
+    {id:3, especie:"gato", genero:"hembra", edadAños:7, color:"negro"},
+    {id:4, especie:"conejo", genero:"hembra", edadAños:2, color:"blanco"},
+    {id:5, especie:"perro", genero:"macho", edadAños:10, color:"negro"},
+    {id:6, especie:"perro", genero:"hembra", edadAños:1, color:"cafe"},
+    {id:7, especie:"pez", genero:"macho", edadAños:3, color:"griz"},
+];
 
-let peso=Number(prompt("ingrese su peso en kilogramos: "))
-let estatura=Number(prompt("ingrese su estatura en centimetros: "))
-while(isNaN(peso) || isNaN(estatura)){
-    alert("¡EL VALOR INGRESADO ES INCORRECTO!")
-    peso=Number(prompt("ingrese su peso en kilogramos: "))
-    estatura=Number(prompt("ingrese su estatura en centimetros: "))
-}
-estatura=convertorMetros(estatura)
-let imc=calculaIMC(peso,estatura)
-mostrarResultados(imc)
+//funcion que muetra en pantalla todas las opciones par que el usuario escoja
+const listar=(opciones, propiedad1, propiedad2, propiedad3, propiedad4) => "Ingrese el ID de la mascota que desea adoptar \n"+opciones.map( mascota =>"ID: "+mascota[propiedad1]+"  genero: "+mascota[propiedad2]+"  años: "+mascota[propiedad3]+"  color: "+mascota[propiedad4]).join("\n")
 
-/*funcion que convierte una estatura de centimetros a metros */
-function convertorMetros(estatura){
-    let estaturaMetros=estatura/100
-    return estaturaMetros
-}
 
-/*funcion que calcula el indice de masa corporal de una persona */
-function calculaIMC(peso, estatura){
-    let imc= peso/ (estatura**2)
-    return imc
-}
 
-/*funcion que muestra el resultado de su respectivo IMC  */
-function mostrarResultados(imc){
-    if(imc<18.5){
-        alert("el estado de su IMC(indice de masa corporal) es de: "+imc+"\nestado: bajo \ndebes aumentar tu masa muscular")
-    }else if(imc>=18.5 && imc<=24.9){
-        alert("el estado de su IMC(indice de masa corporal) es de: " +imc+"\nestado: normal \n¡FELICITACIONES, estas en un estado saludable!")
-    }else if(imc>=25 && imc<=29.9){
-        alert("el estado de su IMC(indice de masa corporal) es de: "+imc+"\nestado: sobrepeso \ndebes adoptar una dieta")
-    }else{
-        alert("el estado de su IMC(indice de masa corporal) es de"+imc+"\nestado: obecidad \ndebes adoptar una dieta y una rutina de ejercicios")
+let animalBuscado = prompt("Ingrese la especie de animal que desea adoptar: ").toLowerCase()
+let opciones = mascotas.filter(el => el.especie === animalBuscado)
+let idSeleccionado=parseInt(prompt(listar(opciones,"id", "genero", "edadAños", "color" )))
+adoptar(mascotas,opciones,idSeleccionado)
+
+
+//funcion que hace el proceso de la adopcion
+function adoptar(mascotas, opciones,id){
+    if (opciones.length === 0) {
+        console.log("Lo siento, no hay animales de esa especie disponibles para adopción.")
+    } else {
+        let indice = mascotas.findIndex(el => el.id === id);
+
+        if (indice === -1) {
+            alert("ID inválido. No se ha realizado la adopción.")
+        } else {
+            let animalAdoptado = mascotas.splice(indice, 1)[0]
+            alert(`¡Felicidades por la adopción! Ha adoptado un ${animalAdoptado.especie} ${animalAdoptado.genero}, de ${animalAdoptado.edadAños} años de edad, de color ${animalAdoptado.color}.`)
+        }
     }
 }
