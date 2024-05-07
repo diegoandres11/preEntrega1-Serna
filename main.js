@@ -1,44 +1,103 @@
-
 let mascotas=[
-    {id:1, especie:"perro", genero:"macho", edadAños:3, color:"negro y blanco"},
-    {id:2, especie:"gato", genero:"macho", edadAños:0.4, color:"naranja"},
-    {id:3, especie:"gato", genero:"hembra", edadAños:7, color:"negro"},
-    {id:4, especie:"conejo", genero:"hembra", edadAños:2, color:"blanco"},
-    {id:5, especie:"perro", genero:"macho", edadAños:10, color:"negro"},
-    {id:6, especie:"perro", genero:"hembra", edadAños:1, color:"cafe"},
-    {id:7, especie:"pez", genero:"macho", edadAños:3, color:"griz"},
-];
+    {id:1, especie:"perro", genero:"macho", edadAños:3, color:"negro y blanco", rutaImg:"perro-blancoynegro.jpg"},
+    {id:2, especie:"gato", genero:"macho", edadAños:0.4, color:"naranja", rutaImg:"gato-naranja.avif"},
+    {id:3, especie:"gato", genero:"hembra", edadAños:7, color:"negro", rutaImg:"gato-negro.jpg"},
+    {id:4, especie:"conejo", genero:"hembra", edadAños:2, color:"blanco", rutaImg:"conejo-blanco.jpg"},
+    {id:5, especie:"perro", genero:"macho", edadAños:10, color:"negro", rutaImg:"perro-negro.jpg"},
+    {id:6, especie:"perro", genero:"hembra", edadAños:1, color:"cafe", rutaImg:"perro-cafe.jpg"},
+    {id:7, especie:"pez", genero:"macho", edadAños:3, color:"griz", rutaImg:"pez-gris.jpg"}
+]
 
+function principal(mascotas) {
+    let carrito = []
 
-//funcion que muetra en pantalla todas las opciones par que el usuario escoja
-const listar=(opciones, propiedad1, propiedad2, propiedad3, propiedad4) => "Ingrese el ID de la mascota que desea adoptar \n"+"Ingrese 0 para salir \n"+opciones.map( mascota =>"ID: "+mascota[propiedad1]+"  genero: "+mascota[propiedad2]+"  años: "+mascota[propiedad3]+"  color: "+mascota[propiedad4]).join("\n")
+    let botonBuscar = document.getElementById("botonBuscar")
+    botonBuscar.addEventListener("click", function() {
+        filtrarYRenderizar(mascotas, carrito)
+    })
 
+    let botonBuscarGenero = document.getElementById("botonBuscarGenero")
+    botonBuscarGenero.addEventListener("click", function() {
+        filtrarPorGenero(mascotas, carrito)
+    })
 
-let carrito=[]
-let idSeleccionado
-while(idSeleccionado!=0){
-    let animalBuscado = prompt("Ingrese la especie de animal que desea adoptar: ").toLowerCase()
-    let opciones = mascotas.filter(el => el.especie === animalBuscado)
-    idSeleccionado=parseInt(prompt(listar(opciones,"id", "genero", "edadAños", "color" )))
-    adoptar(mascotas,opciones,idSeleccionado)
+    renderizarProductos(mascotas, carrito)
 }
 
-
-
-
-//funcion que hace el proceso de la adopcion
-function adoptar(mascotas, opciones, id) {
-    if (opciones.length === 0) {
-        alert("Lo siento, no hay animales de esa especie disponibles para adopción.");
-    } else {
-        let indice = mascotas.findIndex(el => el.id === id);
-
-        if (indice === -1) {
-            alert("ID inválido. No se ha realizado la adopción.");
-        } else {
-            let animalAdoptado = mascotas.splice(indice, 1)[0];
-            carrito.push(animalAdoptado); // Agregar la mascota seleccionada al carrito
-            alert(`¡Felicidades por la adopción! Ha adoptado un ${animalAdoptado.especie} ${animalAdoptado.genero}, de ${animalAdoptado.edadAños} años de edad, de color ${animalAdoptado.color}.`);
-        }
-    }
+function filtrarYRenderizar(mascotas, carrito) {
+    let productosFiltrados = filtrarProductos(mascotas)
+    renderizarProductos(productosFiltrados, carrito)
 }
+
+function filtrarProductos(productos) {
+    let inputBusqueda = document.getElementById("inputBusqueda")
+    return productos.filter(producto => producto.especie.includes(inputBusqueda.value))
+}
+
+function filtrarPorGenero(mascotas, carrito) {
+    let inputBusquedaGenero = document.getElementById("inputBusquedaGenero")
+    let genero = inputBusquedaGenero.value.toLowerCase()
+    let productosFiltrados = mascotas.filter(mascota => mascota.genero.toLowerCase() === genero)
+    renderizarProductos(productosFiltrados, carrito)
+}
+
+function renderizarProductos(mascotas, carrito) {
+    let contenedorProductos = document.getElementById("contenedorProductos")
+    contenedorProductos.innerHTML = ""
+
+    mascotas.forEach(mascota => {
+        let tarjetaProducto = document.createElement("div")
+        tarjetaProducto.className = "tarjeta"
+
+        tarjetaProducto.innerHTML = `
+            <h3>${mascota.especie}</h3>
+            <img class='imgTarjeta' src=./assets/img/${mascota.rutaImg} />
+            <button id=botonCarrito${mascota.id}>Agregar al carrito</button>
+        `
+
+        contenedorProductos.appendChild(tarjetaProducto)
+
+        let botonAgregarAlCarrito = document.getElementById("botonCarrito" + mascota.id)
+        botonAgregarAlCarrito.addEventListener("click", function(e) {
+            agregarProductoAlCarrito(e, mascotas, carrito)
+        })
+    })
+}
+
+function agregarProductoAlCarrito(e, mascotas, carrito) {
+    let idDelProducto = Number(e.target.id.substring(12))
+    console.log(idDelProducto)
+
+    let productoBuscado = mascotas.find(producto => producto.id === idDelProducto)
+
+    carrito.push({
+        id: productoBuscado.id,
+        especie: productoBuscado.especie,
+        genero: productoBuscado.genero,
+        edadAños: productoBuscado.edadAños,
+        color: productoBuscado.color,
+        rutaImg: productoBuscado.rutaImg
+    })
+
+    console.log(carrito)
+    renderizarCarrito(carrito)
+}
+
+function renderizarCarrito(carrito) {
+    let contenedorCarrito = document.getElementById("contenedorCarrito")
+    contenedorCarrito.innerHTML = ""
+    carrito.forEach(producto => {
+        let tarjetaProductoCarrito = document.createElement("div")
+        tarjetaProductoCarrito.className = "tarjetaProductoCarrito"
+
+        tarjetaProductoCarrito.innerHTML = `
+            <p>Especie: ${producto.especie}</p>
+            <p>Genero: ${producto.genero}</p>
+            <img class='imgTarjeta' src=./assets/img/${producto.rutaImg} />
+        `
+
+        contenedorCarrito.appendChild(tarjetaProductoCarrito)
+    })
+}
+
+principal(mascotas)

@@ -1,0 +1,13 @@
+#contenedorProductos{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tarjeta{
+    width: 20%;
+    border: solid 1px red;
+}
+
+.imgTarjeta{
+    width: 200px;
+}
