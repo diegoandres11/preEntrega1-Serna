@@ -10,7 +10,7 @@ let mascotas=[
 
 function principal(mascotas) {
     let carrito = []
-
+    const obtenerCarritoLS = () => JSON.parse(localStorage.getItem("carrito")) || []
     let botonBuscar = document.getElementById("botonBuscar")
     botonBuscar.addEventListener("click", function() {
         filtrarYRenderizar(mascotas, carrito)
