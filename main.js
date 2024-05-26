@@ -1,103 +1,181 @@
-let mascotas=[
-    {id:1, especie:"perro", genero:"macho", edadAños:3, color:"negro y blanco", rutaImg:"perro-blancoynegro.jpg"},
-    {id:2, especie:"gato", genero:"macho", edadAños:0.4, color:"naranja", rutaImg:"gato-naranja.avif"},
-    {id:3, especie:"gato", genero:"hembra", edadAños:7, color:"negro", rutaImg:"gato-negro.jpg"},
-    {id:4, especie:"conejo", genero:"hembra", edadAños:2, color:"blanco", rutaImg:"conejo-blanco.jpg"},
-    {id:5, especie:"perro", genero:"macho", edadAños:10, color:"negro", rutaImg:"perro-negro.jpg"},
-    {id:6, especie:"perro", genero:"hembra", edadAños:1, color:"cafe", rutaImg:"perro-cafe.jpg"},
-    {id:7, especie:"pez", genero:"macho", edadAños:3, color:"griz", rutaImg:"pez-gris.jpg"}
-]
+async function pedirInfo() {
+    try {
+        let response = await fetch("./data.json")
+        let mascotas = await response.json()
+        return mascotas
+    } catch (error) {
+        alert("sucedió un error")
+    }
+}
 
-function principal(mascotas) {
-    let carrito = []
-    const obtenerCarritoLS = () => JSON.parse(localStorage.getItem("carrito")) || []
-    let botonBuscar = document.getElementById("botonBuscar")
-    botonBuscar.addEventListener("click", function() {
-        filtrarYRenderizar(mascotas, carrito)
+function mostrarDetalleMascota(mascota) {
+    Swal.fire({
+        title: mascota.especie,
+        text: mascota.descripcion,
+        imageUrl: `./assets/img/${mascota.rutaImg}`,
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: 'Custom image',
+        confirmButtonText: 'Salir',
     })
+}
 
-    let botonBuscarGenero = document.getElementById("botonBuscarGenero")
-    botonBuscarGenero.addEventListener("click", function() {
-        filtrarPorGenero(mascotas, carrito)
-    })
+async function principal() {
+    const mascotas = await pedirInfo()
+    if (mascotas) {
+        const carrito = obtenerCarritoLS()
 
-    renderizarProductos(mascotas, carrito)
+        mascotas.forEach(mascota => {
+            mascota.enCarrito = false
+        })
+
+        carrito.forEach(item => {
+            const mascota = mascotas.find(m => m.id === item.id)
+            if (mascota) {
+                mascota.enCarrito = true
+            }
+        })
+
+        let botonBuscar = document.getElementById("botonBuscar")
+        botonBuscar.addEventListener("click", function() {
+            filtrarYRenderizar(mascotas, carrito)
+        })
+
+        let botonBuscarGenero = document.getElementById("botonBuscarGenero")
+        botonBuscarGenero.addEventListener("click", function() {
+            filtrarPorGenero(mascotas, carrito)
+        })
+
+        renderizarMascotas(mascotas, carrito)
+        renderizarCarrito(mascotas, carrito)
+    }
 }
 
 function filtrarYRenderizar(mascotas, carrito) {
-    let productosFiltrados = filtrarProductos(mascotas)
-    renderizarProductos(productosFiltrados, carrito)
+    let mascotasFiltradas = filtrarMascotas(mascotas)
+    renderizarMascotas(mascotasFiltradas, carrito)
 }
 
-function filtrarProductos(productos) {
+function filtrarMascotas(mascotas) {
     let inputBusqueda = document.getElementById("inputBusqueda")
-    return productos.filter(producto => producto.especie.includes(inputBusqueda.value))
+    return mascotas.filter(mascota => mascota.especie.includes(inputBusqueda.value))
 }
 
 function filtrarPorGenero(mascotas, carrito) {
     let inputBusquedaGenero = document.getElementById("inputBusquedaGenero")
     let genero = inputBusquedaGenero.value.toLowerCase()
-    let productosFiltrados = mascotas.filter(mascota => mascota.genero.toLowerCase() === genero)
-    renderizarProductos(productosFiltrados, carrito)
+    let mascotasFiltradas = mascotas.filter(mascota => mascota.genero.toLowerCase() === genero)
+    renderizarMascotas(mascotasFiltradas, carrito)
 }
 
-function renderizarProductos(mascotas, carrito) {
-    let contenedorProductos = document.getElementById("contenedorProductos")
-    contenedorProductos.innerHTML = ""
+function renderizarMascotas(mascotas, carrito) {
+    let contenedorMascotas = document.getElementById("contenedorProductos")
+    contenedorMascotas.innerHTML = ""
 
     mascotas.forEach(mascota => {
-        let tarjetaProducto = document.createElement("div")
-        tarjetaProducto.className = "tarjeta"
+        if (!mascota.enCarrito) {
+            let tarjetaMascota = document.createElement("div")
+            tarjetaMascota.className = "tarjeta"
 
-        tarjetaProducto.innerHTML = `
-            <h3>${mascota.especie}</h3>
-            <img class='imgTarjeta' src=./assets/img/${mascota.rutaImg} />
-            <button id=botonCarrito${mascota.id}>Agregar al carrito</button>
-        `
+            tarjetaMascota.innerHTML = `
+                <h3>${mascota.especie}</h3>
+                <img class='imgTarjeta' src='./assets/img/${mascota.rutaImg}' />
+                <button id='botonCarrito${mascota.id}'>Agregar al carrito</button>
+                <button class="botonDetalle" data-id="${mascota.id}">¡Conoce más!</button>
+            `
 
-        contenedorProductos.appendChild(tarjetaProducto)
+            contenedorMascotas.appendChild(tarjetaMascota)
 
-        let botonAgregarAlCarrito = document.getElementById("botonCarrito" + mascota.id)
-        botonAgregarAlCarrito.addEventListener("click", function(e) {
-            agregarProductoAlCarrito(e, mascotas, carrito)
+            let botonAgregarAlCarrito = document.getElementById("botonCarrito" + mascota.id)
+            botonAgregarAlCarrito.addEventListener("click", function(e) {
+                agregarMascotaAlCarrito(e, mascotas, carrito)
+            })
+        }
+    })
+
+    let botonesDetalle = document.querySelectorAll(".botonDetalle")
+    botonesDetalle.forEach(boton => {
+        boton.addEventListener("click", function(e) {
+            let idMascota = e.target.getAttribute("data-id")
+            let mascota = mascotas.find(m => m.id == idMascota)
+            mostrarDetalleMascota(mascota)
         })
     })
 }
 
-function agregarProductoAlCarrito(e, mascotas, carrito) {
-    let idDelProducto = Number(e.target.id.substring(12))
-    console.log(idDelProducto)
+function agregarMascotaAlCarrito(e, mascotas, carrito) {
+    let idMascota = Number(e.target.id.substring(12))
+    console.log(idMascota)
 
-    let productoBuscado = mascotas.find(producto => producto.id === idDelProducto)
+    let mascotaBuscada = mascotas.find(mascota => mascota.id === idMascota)
 
-    carrito.push({
-        id: productoBuscado.id,
-        especie: productoBuscado.especie,
-        genero: productoBuscado.genero,
-        edadAños: productoBuscado.edadAños,
-        color: productoBuscado.color,
-        rutaImg: productoBuscado.rutaImg
-    })
+    if (mascotaBuscada && !mascotaBuscada.enCarrito) {
+        mascotaBuscada.enCarrito = true
+        carrito.push({
+            id: mascotaBuscada.id,
+            especie: mascotaBuscada.especie,
+            genero: mascotaBuscada.genero,
+            edadAños: mascotaBuscada.edadAños,
+            color: mascotaBuscada.color,
+            rutaImg: mascotaBuscada.rutaImg
+        })
 
-    console.log(carrito)
-    renderizarCarrito(carrito)
+        console.log("Carrito actualizado:", carrito)
+        localStorage.setItem("carrito", JSON.stringify(carrito))
+        renderizarMascotas(mascotas, carrito)
+        renderizarCarrito(mascotas, carrito)
+    } else {
+        console.log("La mascota ya está en el carrito o no se encontró en el array de mascotas.")
+    }
 }
 
-function renderizarCarrito(carrito) {
+function eliminarMascotaDelCarrito(e, mascotas, carrito) {
+    let idMascota = Number(e.target.id.substring(13))
+    console.log(idMascota)
+
+    let indexCarrito = carrito.findIndex(mascota => mascota.id === idMascota)
+    if (indexCarrito !== -1) {
+        carrito.splice(indexCarrito, 1)
+        let mascotaBuscada = mascotas.find(mascota => mascota.id === idMascota)
+        if (mascotaBuscada) {
+            mascotaBuscada.enCarrito = false
+        }
+
+        console.log("Carrito actualizado:", carrito)
+        localStorage.setItem("carrito", JSON.stringify(carrito))
+        renderizarMascotas(mascotas, carrito)
+        renderizarCarrito(mascotas, carrito)
+    } else {
+        console.log("La mascota no se encontró en el carrito.")
+    }
+}
+
+function renderizarCarrito(mascotas, carrito) {
     let contenedorCarrito = document.getElementById("contenedorCarrito")
     contenedorCarrito.innerHTML = ""
-    carrito.forEach(producto => {
-        let tarjetaProductoCarrito = document.createElement("div")
-        tarjetaProductoCarrito.className = "tarjetaProductoCarrito"
+    carrito.forEach(mascota => {
+        let tarjetaMascotaCarrito = document.createElement("div")
+        tarjetaMascotaCarrito.className = "tarjetaProductoCarrito"
 
-        tarjetaProductoCarrito.innerHTML = `
-            <p>Especie: ${producto.especie}</p>
-            <p>Genero: ${producto.genero}</p>
-            <img class='imgTarjeta' src=./assets/img/${producto.rutaImg} />
+        tarjetaMascotaCarrito.innerHTML = `
+            <p>Especie: ${mascota.especie}</p>
+            <p>Género: ${mascota.genero}</p>
+            <img class='imgTarjeta' src='./assets/img/${mascota.rutaImg}' />
+            <button id='botonEliminar${mascota.id}'>Eliminar del carrito</button>
         `
 
-        contenedorCarrito.appendChild(tarjetaProductoCarrito)
+        contenedorCarrito.appendChild(tarjetaMascotaCarrito)
+
+        let botonEliminarDelCarrito = document.getElementById("botonEliminar" + mascota.id)
+        botonEliminarDelCarrito.addEventListener("click", function(e) {
+            console.log(e.target.id)
+            eliminarMascotaDelCarrito(e, mascotas, carrito)
+        })
     })
 }
 
-principal(mascotas)
+function obtenerCarritoLS() {
+    return JSON.parse(localStorage.getItem("carrito")) || []
+}
+
+pedirInfo().then(principal)

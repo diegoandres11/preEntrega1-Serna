@@ -3,18 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     
     <title>Document</title>
 </head>
 <body>
-    <input id="inputBusqueda" placeholder="Buscar por especie">
-    <button id="botonBuscar" >BUSCAR</button>
-    <input id="inputBusquedaGenero" placeholder="Buscar por genero">
-    <button id="botonBuscarGenero" >BUSCAR</button>
+    <header id="header">
+        <nav>
+            <a class="logo" href="#">
+                <img src="./assets/img/logo.jpg" alt="Logo" width="40">
+            </a>
 
-    <div id="contenedorProductos"></div>
-    <div id="contenedorCarrito"></div>
+            <h1 id="titulo">Patitas Felices</h1>
+            <div class="contenedor-nav">
+                <ul class="navbar-nav">
+                    <li class="item">
+                        <a class="nav-link" href="#">Inicio</a>
+                    </li>
+                    <li class="item">
+                        <a class="nav-link" href="#">Atracciones</a>
+                    </li>
+                    <li class="item">
+                        <a class="nav-link" href="#">Conocenos</a>
+                    </li>
+                    <li class="item">
+                        <a class="nav-link" href="#">Contactanos</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <input id="inputBusqueda" placeholder="Buscar por especie">
+        <button id="botonBuscar" >BUSCAR</button>
+        <input id="inputBusquedaGenero" placeholder="Buscar por genero">
+        <button id="botonBuscarGenero" >BUSCAR</button>
+
+        <div id="contenedorProductos"></div>
+        <div id="contenedorCarrito">
+            <h2>tu carrito</h2>
+        </div>
+        <article>
+            <h2>tenemos a muchos buscando un hogar ❤️</h2>
+            <p>Nos alegra saber que estas pensando en adoptar, todos nuestros peludos están a la espera de una familia y son entregados en óptimas condiciones de salud y belleza a adoptantes responsables y amorosos. En esta página conocerás nuestro proceso de adopción y requisitos, pero lo primero es conocer al peludo que deseas adoptar, si ya tienes su nombre sigue leyendo nuestras condiciones, de lo contrario puedes conocer todos nuestro peluditos en los siguientes links.</p>
+            <img src="./assets/img/mascotas.jpg" alt="">
+        </article>
+
+    </main>
+    <footer id="footer">
+        <article class="article">
+            <h2>"muchos animales necesitan un hogar"</h2>
+            <p>ADOPTA, dales una oportunidad, y seran tus amigos fieles en todo momento, no te arrepentiras</p>
+        </article>
+        <article class="article">
+            <h2>hemos rescatado mas de 250 peluditos</h2>
+            <p>cada adopcion garantiza la oportunidad de salvar a otro peludo de la calle</p>
+        </article>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="main.js"></script>
     <link rel="stylesheet" href="./css/style.css">
+    
 </body>
 </html>

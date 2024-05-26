@@ -1,13 +1,122 @@
-#contenedorProductos{
+#header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  nav{
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .logo img {
+    margin-right: 10px;
+  }
+  
+  .contenedor-nav {
+    margin-left: auto;
+    display: flex;
+    justify-content: space-around;
+    margin-left: 20%;
+  }
+  
+  .navbar-nav {
+    list-style: none;
+    padding: 0;
+    display: flex;
+  }
+  
+  .navbar-nav .item {
+    margin-right: 20px;
+  }
+  
+  .navbar-nav .nav-link {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #ffc107; /* Cambia el color al pasar el ratón */
+  }
+  
+  /* Estilos para los botones */
+  #botonBuscar,
+  #botonBuscarGenero {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #botonBuscar:hover,
+  #botonBuscarGenero:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilos para el contenedor de productos */
+  #contenedorProductos {
     display: flex;
     flex-wrap: wrap;
-}
-
-.tarjeta{
-    width: 20%;
-    border: solid 1px red;
-}
-
-.imgTarjeta{
-    width: 200px;
-}
+    justify-content: space-around;
+    margin-top: 20px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  .tarjeta {
+    width: 300px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .tarjeta h3 {
+    margin-top: 0;
+  }
+  
+  .imgTarjeta {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilos para el contenedor del carrito */
+  #contenedorCarrito {
+    margin-top: 20px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  .tarjetaProductoCarrito {
+    width: 300px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .tarjetaProductoCarrito img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilos generales */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  main {
+    padding: 20px;
+  }
