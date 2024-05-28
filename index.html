@@ -9,19 +9,18 @@
 </head>
 <body>
     <header id="header">
-        <nav>
             <a class="logo" href="#">
-                <img src="./assets/img/logo.jpg" alt="Logo" width="40">
+                <img src="./assets/img/logo.jpg" alt="Logo" width="80">
             </a>
 
             <h1 id="titulo">Patitas Felices</h1>
-            <div class="contenedor-nav">
+            <nav class="contenedor-nav">
                 <ul class="navbar-nav">
                     <li class="item">
                         <a class="nav-link" href="#">Inicio</a>
                     </li>
                     <li class="item">
-                        <a class="nav-link" href="#">Atracciones</a>
+                        <a class="nav-link" href="#">Donaciones</a>
                     </li>
                     <li class="item">
                         <a class="nav-link" href="#">Conocenos</a>
@@ -30,22 +29,36 @@
                         <a class="nav-link" href="#">Contactanos</a>
                     </li>
                 </ul>
-            </div>
-        </nav>
+            </nav>
     </header>
     <main>
-        <input id="inputBusqueda" placeholder="Buscar por especie">
-        <button id="botonBuscar" >BUSCAR</button>
-        <input id="inputBusquedaGenero" placeholder="Buscar por genero">
-        <button id="botonBuscarGenero" >BUSCAR</button>
+        <div class="container-search">
+            <div class="search" >
+                <h2>busca por la especie</h2>
+                <input id="inputBusqueda" placeholder="Buscar por especie">
+                <button id="botonBuscar" >BUSCAR</button>
+            </div>
+            <div class="search">
+                <h2>busca por un genero (macho, hembra)</h2>
+                <input id="inputBusquedaGenero" placeholder="Buscar por genero">
+                <button id="botonBuscarGenero" >BUSCAR</button>
+            </div>
+        </div>
+        
+
 
         <div id="contenedorProductos"></div>
-        <div id="contenedorCarrito">
-            <h2>tu carrito</h2>
+        <section class="seccionCarrito">
+            <h2>mascotas agregadas al carrito 🐾 🛒</h2>
+            <div id="contenedorCarrito"></div>
+        </section>
         </div>
         <article>
-            <h2>tenemos a muchos buscando un hogar ❤️</h2>
-            <p>Nos alegra saber que estas pensando en adoptar, todos nuestros peludos están a la espera de una familia y son entregados en óptimas condiciones de salud y belleza a adoptantes responsables y amorosos. En esta página conocerás nuestro proceso de adopción y requisitos, pero lo primero es conocer al peludo que deseas adoptar, si ya tienes su nombre sigue leyendo nuestras condiciones, de lo contrario puedes conocer todos nuestro peluditos en los siguientes links.</p>
+            <div>
+                <h2>tenemos a muchos buscando un hogar ❤️</h2>
+                <p>Nos alegra saber que estas pensando en adoptar, todos nuestros peludos están a la espera de una familia y son entregados en óptimas condiciones de salud y belleza a adoptantes responsables y amorosos. En esta página conocerás nuestro proceso de adopción y requisitos, pero lo primero es conocer al peludo que deseas adoptar, si ya tienes su nombre sigue leyendo nuestras condiciones, de lo contrario puedes conocer todos nuestro peluditos en los siguientes links.</p>
+            </div>
+            
             <img src="./assets/img/mascotas.jpg" alt="">
         </article>
 

@@ -80,8 +80,8 @@ function renderizarMascotas(mascotas, carrito) {
             tarjetaMascota.innerHTML = `
                 <h3>${mascota.especie}</h3>
                 <img class='imgTarjeta' src='./assets/img/${mascota.rutaImg}' />
-                <button id='botonCarrito${mascota.id}'>Agregar al carrito</button>
-                <button class="botonDetalle" data-id="${mascota.id}">¡Conoce más!</button>
+                <button class="boton" id='botonCarrito${mascota.id}'>Agregar al carrito</button>
+                <button class="boton botonDetalle" data-id="${mascota.id}">¡Conoce más!</button>
             `
 
             contenedorMascotas.appendChild(tarjetaMascota)
@@ -161,7 +161,7 @@ function renderizarCarrito(mascotas, carrito) {
             <p>Especie: ${mascota.especie}</p>
             <p>Género: ${mascota.genero}</p>
             <img class='imgTarjeta' src='./assets/img/${mascota.rutaImg}' />
-            <button id='botonEliminar${mascota.id}'>Eliminar del carrito</button>
+            <button id='botonEliminar${mascota.id}' class="boton">Eliminar del carrito</button>
         `
 
         contenedorCarrito.appendChild(tarjetaMascotaCarrito)
@@ -178,4 +178,4 @@ function obtenerCarritoLS() {
     return JSON.parse(localStorage.getItem("carrito")) || []
 }
 
-pedirInfo().then(principal)
+principal()

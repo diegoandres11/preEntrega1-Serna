@@ -1,26 +1,64 @@
 #header {
-    background-color: #333;
+    background-color: rgb(0, 0, 0);
     color: white;
     padding: 20px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+  }
+
+  #titulo{
+    width: 300px;
+    align-items: center;
+    text-align: center;
+  }
+
+  article{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    color: var(--main-color);
+    margin-bottom: 5%;
+    margin-top: 5%;
+  }
+
+  article img{
+    border-radius: 50%;
+    margin: 1%;
+  }
+
+  .article{
+    width: 40%;
+    height: 200px;
+    padding: 2%;
+    margin-bottom:5%;
+    color: white;
+    background-color: var(--main-color);
+  }
+
+  .botonDetalle{
+    margin-top: 3%;
   }
 
   nav{
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    text-align: center;
   }
   
   .logo img {
     margin-right: 10px;
+    border-radius: 50%;
   }
   
   .contenedor-nav {
     margin-left: auto;
     display: flex;
     justify-content: space-around;
-    margin-left: 20%;
   }
   
   .navbar-nav {
@@ -39,13 +77,13 @@
   }
   
   .navbar-nav .nav-link:hover {
-    color: #ffc107; /* Cambia el color al pasar el ratón */
+    color: var(--main-color);
   }
   
   /* Estilos para los botones */
   #botonBuscar,
   #botonBuscarGenero {
-    background-color: #007bff;
+    background-color: var(--main-color);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -73,9 +111,33 @@
   .tarjeta {
     width: 300px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 5px dashed var(--main-color);
     border-radius: 5px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  .seccionCarrito{
+    margin-top: 10%;
+  }
+
+  .container-search{
+    display: flex;
+  }
+
+  .search{
+    margin-left: 10%;
+  }
+
+  .boton{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--main-color); 
+    color: white;
   }
   
   .tarjeta h3 {
@@ -83,9 +145,10 @@
   }
   
   .imgTarjeta {
-    width: 100%;
-    height: auto;
+    width: 200px;
+    height: 200px;
     margin-bottom: 10px;
+    border-radius: 50%;
   }
   
   /* Estilos para el contenedor del carrito */
@@ -94,6 +157,7 @@
     border: 2px solid #333;
     border-radius: 5px;
     padding: 20px;
+    display: flex;
   }
   
   .tarjetaProductoCarrito {
@@ -102,6 +166,10 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
   
   .tarjetaProductoCarrito img {
@@ -111,6 +179,13 @@
   }
   
   /* Estilos generales */
+  :root{
+    --main-color: #f97a7a
+  }
+  *{
+    box-sizing: border-box;
+  }
+
   body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -119,4 +194,11 @@
   
   main {
     padding: 20px;
+  }
+
+  #footer{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-evenly;
   }
