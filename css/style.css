@@ -9,7 +9,49 @@
     text-align: center;
   }
 
+  .whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px; 
+    width: 60px;
+    height: 60px; 
+    background-color: #25D366; 
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25); 
+  }
+  
+  .whatsapp-button img {
+    width: 50%;
+    margin-top: 25%; 
+  }
+
+  #carrito{
+    position: fixed;
+    bottom: 100px;
+    right: 10px; 
+    width: 100px;
+    height: auto; 
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 20%;
+    border: var(--main-color) solid 3px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  }
+
+.collapse{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.navbar-toggler{
+  background-color: #ccc;
+}
   #titulo{
+    color: white;
     width: 300px;
     align-items: center;
     text-align: center;
@@ -30,13 +72,29 @@
     margin: 1%;
   }
 
+  #opciones{
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+  }
+
+  #opciones:hover{
+    background-color: #cdc5c5;
+  }
+
   .article{
-    width: 40%;
-    height: 200px;
-    padding: 2%;
+    width: 80%;
+    height: auto;
+    padding: 5%;
     margin-bottom:5%;
     color: white;
     background-color: var(--main-color);
+  }
+
+  .footer-cont{
+    margin-left: 10%;
   }
 
   .botonDetalle{
@@ -51,14 +109,21 @@
   }
   
   .logo img {
-    margin-right: 10px;
     border-radius: 50%;
   }
   
   .contenedor-nav {
-    margin-left: auto;
     display: flex;
     justify-content: space-around;
+  }
+
+  .navbar{
+    width: 100%;
+  }
+  
+  #cont-logo{
+    display: flex;
+    align-items: center;
   }
   
   .navbar-nav {
@@ -124,6 +189,11 @@
     margin-top: 10%;
   }
 
+  .cont{
+    display: flex;
+    justify-content: space-between;
+  }
+
   .container-search{
     display: flex;
   }
@@ -153,23 +223,24 @@
   
   /* Estilos para el contenedor del carrito */
   #contenedorCarrito {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     margin-top: 20px;
     border: 2px solid #333;
     border-radius: 5px;
     padding: 20px;
-    display: flex;
   }
   
   .tarjetaProductoCarrito {
     width: 300px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 5px solid rgb(100, 222, 94);
     border-radius: 5px;
     padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
   }
   
   .tarjetaProductoCarrito img {

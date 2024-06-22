@@ -46,6 +46,8 @@ async function principal() {
             filtrarPorGenero(mascotas, carrito)
         })
 
+        actualizarContadorCarrito(carrito.length)
+
         renderizarMascotas(mascotas, carrito)
         renderizarCarrito(mascotas, carrito)
     }
@@ -58,12 +60,13 @@ function filtrarYRenderizar(mascotas, carrito) {
 
 function filtrarMascotas(mascotas) {
     let inputBusqueda = document.getElementById("inputBusqueda")
-    return mascotas.filter(mascota => mascota.especie.includes(inputBusqueda.value))
+    return mascotas.filter(mascota => mascota.especie.includes(inputBusqueda.value.toLowerCase()))
 }
 
 function filtrarPorGenero(mascotas, carrito) {
-    let inputBusquedaGenero = document.getElementById("inputBusquedaGenero")
+    let inputBusquedaGenero = document.getElementById("opciones")
     let genero = inputBusquedaGenero.value.toLowerCase()
+    console.log(genero)
     let mascotasFiltradas = mascotas.filter(mascota => mascota.genero.toLowerCase() === genero)
     renderizarMascotas(mascotasFiltradas, carrito)
 }
@@ -119,6 +122,7 @@ function agregarMascotaAlCarrito(e, mascotas, carrito) {
             color: mascotaBuscada.color,
             rutaImg: mascotaBuscada.rutaImg
         })
+        actualizarContadorCarrito(carrito.length)
 
         console.log("Carrito actualizado:", carrito)
         localStorage.setItem("carrito", JSON.stringify(carrito))
@@ -148,6 +152,7 @@ function eliminarMascotaDelCarrito(e, mascotas, carrito) {
     } else {
         console.log("La mascota no se encontró en el carrito.")
     }
+    actualizarContadorCarrito(carrito.length)
 }
 
 function renderizarCarrito(mascotas, carrito) {
@@ -177,5 +182,11 @@ function renderizarCarrito(mascotas, carrito) {
 function obtenerCarritoLS() {
     return JSON.parse(localStorage.getItem("carrito")) || []
 }
+
+function actualizarContadorCarrito(cantidad) {
+    let contador = document.getElementById("contadorCarrito")
+    contador.textContent = cantidad
+}
+
 
 principal()

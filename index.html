@@ -3,44 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
 
     
     <title>Document</title>
 </head>
 <body>
-    <header id="header">
-            <a class="logo" href="#">
-                <img src="./assets/img/logo.jpg" alt="Logo" width="80">
-            </a>
-
-            <h1 id="titulo">Patitas Felices</h1>
-            <nav class="contenedor-nav">
-                <ul class="navbar-nav">
-                    <li class="item">
-                        <a class="nav-link" href="#">Inicio</a>
-                    </li>
-                    <li class="item">
-                        <a class="nav-link" href="#">Donaciones</a>
-                    </li>
-                    <li class="item">
-                        <a class="nav-link" href="#">Conocenos</a>
-                    </li>
-                    <li class="item">
-                        <a class="nav-link" href="#">Contactanos</a>
-                    </li>
-                </ul>
-            </nav>
+    <a href="https://wa.me/3128094264" class="whatsapp-button" target="_blank" rel="noopener noreferrer">
+        <img src="./assets/img/whatsapp-icon.png" alt="WhatsApp">
+    </a>
+    <div id="carrito">
+        <p id="parrafo-carrito">🛒 carrito</p>
+        <span id="contadorCarrito">0</span>
+    </div>
+    
+    <header id="header" class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <div id="cont-logo">
+                    <a class="logo navbar-brand" href="#">
+                        <img src="./assets/img/logo.jpg" alt="Logo" width="80">
+                    </a>
+                    <h1 class="navbar-brand" id="titulo">Patitas Felices</h1>
+                </div>
+                
+                <button class="navbar-toggler" id="hamburg" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                      <a class="nav-link" href="#">Donaciones</a>
+                      <a class="nav-link" href="#">Visitanos</a>
+                      <a class="nav-link" href="#">Peluditos</a>
+                      <a class="nav-link" aria-disabled="true" href="#">Contactanos</a>
+                    </div>
+                  </div>
+            </div>
+        </nav>
     </header>
-    <main>
-        <div class="container-search">
-            <div class="search" >
-                <h2>busca por la especie</h2>
+    <main class="container">
+        <div class="row container-search">
+            <div class=" col search" >
+                <h3>busca por la especie</h3>
                 <input id="inputBusqueda" placeholder="Buscar por especie">
                 <button id="botonBuscar" >BUSCAR</button>
             </div>
-            <div class="search">
-                <h2>busca por un genero (macho, hembra)</h2>
-                <input id="inputBusquedaGenero" placeholder="Buscar por genero">
+            <div class="col search">
+                <label for="opciones"><h3>busca por un genero</h3></label>
+                <select name="opciones" id="opciones">
+                    <option value="macho">macho</option>
+                    <option value="hembra">hembra</option>
+                </select>
                 <button id="botonBuscarGenero" >BUSCAR</button>
             </div>
         </div>
@@ -53,29 +67,40 @@
             <div id="contenedorCarrito"></div>
         </section>
         </div>
-        <article>
-            <div>
-                <h2>tenemos a muchos buscando un hogar ❤️</h2>
-                <p>Nos alegra saber que estas pensando en adoptar, todos nuestros peludos están a la espera de una familia y son entregados en óptimas condiciones de salud y belleza a adoptantes responsables y amorosos. En esta página conocerás nuestro proceso de adopción y requisitos, pero lo primero es conocer al peludo que deseas adoptar, si ya tienes su nombre sigue leyendo nuestras condiciones, de lo contrario puedes conocer todos nuestro peluditos en los siguientes links.</p>
-            </div>
-            
-            <img src="./assets/img/mascotas.jpg" alt="">
-        </article>
+<article class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h2>tenemos a muchos buscando un hogar ❤️</h2>
+            <p>Nos alegra saber que estas pensando en adoptar, todos nuestros peludos están a la espera de una familia y son entregados en óptimas condiciones de salud y belleza a adoptantes responsables y amorosos. En esta página conocerás nuestro proceso de adopción y requisitos, pero lo primero es conocer al peludo que deseas adoptar, si ya tienes su nombre sigue leyendo nuestras condiciones, de lo contrario puedes conocer todos nuestro peluditos en los siguientes links.</p>
+        </div>
+        
+        <img src="./assets/img/mascotas.jpg" alt="" class="col">
+    </div>
+</article>
+        
+        
 
     </main>
-    <footer id="footer">
-        <article class="article">
-            <h2>"muchos animales necesitan un hogar"</h2>
-            <p>ADOPTA, dales una oportunidad, y seran tus amigos fieles en todo momento, no te arrepentiras</p>
-        </article>
-        <article class="article">
-            <h2>hemos rescatado mas de 250 peluditos</h2>
-            <p>cada adopcion garantiza la oportunidad de salvar a otro peludo de la calle</p>
-        </article>
+    <footer id="footer" class="container-fluid">
+        <div class="row">
+            <div class="col footer-cont">
+                <article class="article">
+                    <h2>"muchos animales necesitan un hogar"</h2>
+                    <p>ADOPTA, dales una oportunidad, y serán tus amigos fieles en todo momento, no te arrepentirás</p>
+                </article>
+            </div>
+            <div class="col footer-cont">
+                <article class="article">
+                    <h2>hemos rescatado más de 250 peluditos</h2>
+                    <p>cada adopción garantiza la oportunidad de salvar a otro peludo de la calle</p>
+                </article>
+            </div>
+        </div>
     </footer>
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="main.js"></script>
-    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
 </body>
 </html>
